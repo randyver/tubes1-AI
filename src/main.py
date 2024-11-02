@@ -4,6 +4,7 @@ from algorithms.hill_climbing.steepest_ascent import steepest_ascent
 from algorithms.hill_climbing.stochastic import stochastic_hill_climbing
 from algorithms.hill_climbing.sideways_move import sideways_move
 from algorithms.hill_climbing.random_restart import random_restart_hill_climbing
+from algorithms.simulated_annealing.simulated_annealing import simulated_annealing
 
 def plot_scores(scores, algorithm_name):
     plt.plot(scores)
@@ -49,5 +50,7 @@ if __name__ == "__main__":
         run_algorithm(sideways_move, cube, max_sideways_moves=1000)
     elif choice == "4":
         run_algorithm(random_restart_hill_climbing, cube, iterations=1000, restarts=500)
+    elif choice == "5":
+        run_algorithm(simulated_annealing, cube, initial_temp=100, cooling_rate=0.8, max_iter=121000)
     else:
         print("Invalid choice. Please select a number between 1 and 4.")
