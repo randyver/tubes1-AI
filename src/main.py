@@ -2,6 +2,7 @@ import numpy as np
 from algorithms.hill_climbing.stochastic import stochastic_hill_climbing
 from algorithms.hill_climbing.steepest_ascent import steepest_ascent
 from algorithms.hill_climbing.sideways_move import sideways_move
+from algorithms.hill_climbing.random_restart import random_restart_hill_climbing
 
 if __name__ == "__main__":
     cube = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
@@ -20,6 +21,7 @@ if __name__ == "__main__":
 
     # result, score = steepest_ascent(cube)
     # result, score = stochastic_hill_climbing(cube)
-    result, score = sideways_move(cube)
+    # result, score = sideways_move(cube)
+    result, score = random_restart_hill_climbing(cube)
     print(result)
     print("score (out of 109):", score)
