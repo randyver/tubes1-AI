@@ -14,10 +14,24 @@ def plot_scores(scores, algorithm_name):
     plt.show()
 
 def run_algorithm(algorithm, cube, **kwargs):
-    count_restart, result, score, scores, duration = algorithm(cube, **kwargs)
-    print("Final configuration:", result)
-    print(f"Final score (out of 109): {score}")
-    print(f"Search duration: {duration:.2f} s")
+    result = algorithm(cube, **kwargs)
+    
+    if algorithm.__name__ in ["steepest_ascent", "stochastic_hill_climbing", "sideways_move"]:
+        count_iteration, result, score, scores, duration = result
+        count_restart = 0
+    elif algorithm.__name__ == "random_restart_hill_climbing":
+        count_iteration, count_restart, result, score, scores, duration = result
+    elif algorithm.__name__ == "simulated_annealing":
+        count_iteration, result, score, scores, duration = result
+        count_restart = 0
+
+    print(f"Final Cube: {result}")
+    print(f"Final Objective Function Value: {score}")
+    print(f"Search Duration: {duration:.2f} s")
+    print(f"Number of Iterations: {count_iteration}")
+    if algorithm.__name__ == "random_restart_hill_climbing":
+        print(f"Number of Restarts: {count_restart}")
+
     plot_scores(scores, algorithm.__name__)
 
 if __name__ == "__main__":
