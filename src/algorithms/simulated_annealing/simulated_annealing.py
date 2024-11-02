@@ -21,7 +21,7 @@ def simulated_annealing(current_cube, initial_temp, cooling_rate, max_iter):
             current_score = neighbor_score
             scores.append(current_score)
         else:
-            if delta_score > 0 or math.exp(delta_score / temperature) > 0.5:
+            if math.exp(delta_score / temperature) > 0.5:
                 current_cube = neighbor
                 current_score = neighbor_score
                 scores.append(current_score)

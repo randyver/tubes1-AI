@@ -40,6 +40,7 @@ if __name__ == "__main__":
     print("2: Stochastic Hill Climbing")
     print("3: Sideways Move")
     print("4: Random Restart Hill Climbing")
+    print("5: Simulated Annealing")
     choice = input("Enter the number of your choice: ")
 
     if choice == "1":
