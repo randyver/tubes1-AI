@@ -10,6 +10,8 @@ def random_restart_hill_climbing(current_cube, iterations, max_restarts):
     start_time = time.time()
 
     for i in range(max_restarts):
+        if best_score == 109:
+            break
         count_restart += 1
         current_cube = best_cube
         current_score = best_score

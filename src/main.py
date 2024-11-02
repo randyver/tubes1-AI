@@ -14,7 +14,7 @@ def plot_scores(scores, algorithm_name):
     plt.show()
 
 def run_algorithm(algorithm, cube, **kwargs):
-    result, score, scores, duration = algorithm(cube, **kwargs)
+    count_restart, result, score, scores, duration = algorithm(cube, **kwargs)
     print("Final configuration:", result)
     print(f"Final score (out of 109): {score}")
     print(f"Search duration: {duration:.2f} s")
