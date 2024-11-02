@@ -22,7 +22,7 @@ def run_algorithm(algorithm, cube, **kwargs):
     elif algorithm.__name__ == "random_restart_hill_climbing":
         count_iteration, count_restart, result, score, scores, duration = result
     elif algorithm.__name__ == "simulated_annealing":
-        count_iteration, result, score, scores, duration = result
+        count_iteration, result, score, scores, probabilities, count_stuck, duration = result
         count_restart = 0
 
     print(f"Final Cube: {result}")
@@ -31,8 +31,29 @@ def run_algorithm(algorithm, cube, **kwargs):
     print(f"Number of Iterations: {count_iteration}")
     if algorithm.__name__ == "random_restart_hill_climbing":
         print(f"Number of Restarts: {count_restart}")
+    elif algorithm.__name__ == "simulated_annealing":
+        print(f"Number of Stuck Moves: {count_stuck}")
 
     plot_scores(scores, algorithm.__name__)
+    # if algorithm.__name__ == "simulated_annealing":
+    #     unique_probabilities, count_unique_probabilities = np.unique(probabilities, return_counts=True)
+
+    #     plt.plot(count_unique_probabilities, unique_probabilities)
+    #     plt.xlabel("Probability")
+    #     plt.ylabel("Count")
+    #     plt.title("Probability Progress (Line Plot)")
+    #     plt.grid(True)
+    #     plt.show()
+    if algorithm.__name__ == "simulated_annealing":
+        subsampled_probabilities = probabilities[::2000]
+        subsampled_iterations = np.arange(len(subsampled_probabilities)) * 2000
+
+        plt.plot(subsampled_iterations, subsampled_probabilities)
+        plt.xlabel("Iteration")
+        plt.ylabel("Probability")
+        plt.title("Smoothed Probability Progress")
+        plt.grid(True)
+        plt.show()
 
 if __name__ == "__main__":
     cube = np.random.permutation(125) + 1
@@ -56,4 +77,4 @@ if __name__ == "__main__":
     elif choice == "5":
         run_algorithm(simulated_annealing, cube, initial_temp=100, cooling_rate=0.8, max_iter=121000)
     else:
-        print("Invalid choice. Please select a number between 1 and 4.")
+        print("Invalid choice. Please select a number between 1 and 5.")
