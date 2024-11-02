@@ -50,7 +50,7 @@ if __name__ == "__main__":
     elif choice == "3":
         run_algorithm(sideways_move, cube, max_sideways_moves=1000)
     elif choice == "4":
-        run_algorithm(random_restart_hill_climbing, cube, iterations=1000, restarts=500)
+        run_algorithm(random_restart_hill_climbing, cube, iterations=1000, max_restarts=500)
     elif choice == "5":
         run_algorithm(simulated_annealing, cube, initial_temp=100, cooling_rate=0.8, max_iter=121000)
     else:

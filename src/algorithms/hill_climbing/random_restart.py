@@ -2,13 +2,15 @@ import time
 from utils.count_of_match import count_of_match
 from utils.neighbor_generator import generate_random_neighbor
 
-def random_restart_hill_climbing(current_cube, iterations, restarts):
+def random_restart_hill_climbing(current_cube, iterations, max_restarts):
+    count_restart = 0
     best_cube = current_cube
     best_score = count_of_match(current_cube)
     best_scores = [best_score]
     start_time = time.time()
 
-    for i in range(restarts):
+    for i in range(max_restarts):
+        count_restart += 1
         current_cube = best_cube
         current_score = best_score
         scores = [current_score]
@@ -28,4 +30,4 @@ def random_restart_hill_climbing(current_cube, iterations, restarts):
     end_time = time.time()
     duration = end_time - start_time
 
-    return best_cube, best_score, best_scores, duration
+    return count_restart, best_cube, best_score, best_scores, duration
