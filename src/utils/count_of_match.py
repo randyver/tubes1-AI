@@ -1,6 +1,6 @@
 def count_of_match(arr):
     value = 0
-
+    
     # Row Count (x-axis)
     for i in range(25):
         sumRow = arr[5*i] + arr[5*i + 1] + arr[5*i + 2] + arr[5*i + 3] + arr[5*i + 4]
