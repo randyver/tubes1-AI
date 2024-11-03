@@ -5,7 +5,6 @@ from concurrent.futures import ThreadPoolExecutor
 import os
 import sys
 
-# Menambahkan path untuk mengimpor fungsi eksternal
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 from utils.count_of_match import count_of_match
 from algorithms.genetic.crossover import *
@@ -118,14 +117,12 @@ class GeneticAlgorithm:
             scores = self.count_score(population)
             individual_with_best_score = np.argmax(scores)
             best_score = scores[individual_with_best_score]
-            # Simpan skor terbaik untuk setiap iterasi
             iteration_scores.append((best_score, individual_with_best_score))
-            if (iter + 1) % 10 == 0:
-                print(f"Best score in {iter + 1}-iterations: {best_score} state ke: {individual_with_best_score}")
+            # if (iter + 1) % 10 == 0:
+            #     print(f"Best score in {iter + 1}-iterations: {best_score} state ke: {individual_with_best_score}")
 
             new_population = []
             with ThreadPoolExecutor() as executor:
-                # Membuat anak-anak secara paralel
                 futures = [
                     executor.submit(self.create_children, population, scores, self.crossover_func, iter, self.iterations)
                     for _ in range(self.population_size // 2)
@@ -166,13 +163,11 @@ class GeneticAlgorithm:
         parent1 = self.selection(population, scores)
         parent2 = self.selection(population, scores)
 
-        # Pilih crossover function berdasarkan crossover_func
         if crossover_func == "randomized":
             child1, child2 = custom_randomized_segment_preserving_crossover(parent1, parent2)
         else:
             child1, child2 = custom_probabilistic_randomized_segment_preserving_crossover(parent1, parent2, iterations=total_iteration, current_iteration=iter)
 
-        # Mutasi pada anak-anak dengan probabilitas 10%
         if random.random() < 0.1:
             child1 = self.mutate(child1)
         if random.random() < 0.1:

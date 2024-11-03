@@ -47,11 +47,10 @@ def custom_probabilistic_randomized_segment_preserving_crossover(parent1, parent
     protected_indices_p1 = find_protected_indices(parent1)
     protected_indices_p2 = find_protected_indices(parent2)
     
-    # Pertahankan elemen dari segmen yang terlindungi di masing-masing child
     for i in range(len(parent1)):
-        if i in protected_indices_p1 and random.random() > prob_protected:  # Gunakan > untuk mempertahankan
+        if i in protected_indices_p1 and random.random() > prob_protected:
             child1[i] = parent1[i]
-        if i in protected_indices_p2 and random.random() > prob_protected:  # Gunakan > untuk mempertahankan
+        if i in protected_indices_p2 and random.random() > prob_protected:
             child2[i] = parent2[i]
 
     unused_elements_child1 = [parent2[i] for i in range(len(parent2)) if parent2[i] not in child1]
