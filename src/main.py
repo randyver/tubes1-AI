@@ -68,6 +68,7 @@ def run_algorithm(algorithm, cube, **kwargs):
         plt.show()
 
     cp.main(result)
+
 def run_GA(crossover_func : str, population_size : int, iterations: int):
     genetic_solver = GeneticAlgorithm(crossover_func =crossover_func, population_size=population_size,iterations=iterations,shuffle=True)
     solution = genetic_solver.solve()
@@ -82,6 +83,8 @@ def run_GA(crossover_func : str, population_size : int, iterations: int):
     print("Score(obj value):", str(solution["best_score"])+"/109")
     print("Waktu:", elapsed_time, "sec")
     plot_iteration_scores_GA(solution["iteration_scores"])
+
+    cp.main(best_final_state_config)
 
 if __name__ == "__main__":
     cube = np.random.permutation(125) + 1
