@@ -5,7 +5,8 @@ from algorithms.hill_climbing.stochastic import stochastic_hill_climbing
 from algorithms.hill_climbing.sideways_move import sideways_move
 from algorithms.hill_climbing.random_restart import random_restart_hill_climbing
 from algorithms.simulated_annealing.simulated_annealing import simulated_annealing
-
+from algorithms.genetic.genetic_paralel import GeneticAlgorithm
+from algorithms.genetic.plot_ga import plot_iteration_scores_GA
 def plot_scores(scores, algorithm_name):
     plt.plot(scores)
     plt.xlabel("Iteration")
@@ -62,6 +63,19 @@ def run_algorithm(algorithm, cube, **kwargs):
         plt.title("Smoothed Probability Progress")
         plt.grid(True)
         plt.show()
+def run_GA(crossover_func : str, population_size : int, iterations: int):
+    genetic_solver = GeneticAlgorithm(crossover_func =crossover_func, population_size=population_size,iterations=iterations,shuffle=True)
+    solution = genetic_solver.solve()
+    elapsed_time = solution['elapsed_time']
+    best_initial_state = solution['best_initial_state']
+    best_final_state_index = solution['best_index']
+    best_final_state_config = solution['best_config']
+    matched_segment_list = solution['matched_list']
+    print("State awal: ", best_initial_state)
+    print(f"State solusi: populasi ke-{best_final_state_index}, konfigurasi:", best_final_state_config)
+    print("Daftar segment matched-315: ", matched_segment_list)
+    print("Waktu: ", elapsed_time, "sec")
+    plot_iteration_scores_GA(solution["iteration_scores"])
 
 if __name__ == "__main__":
     cube = np.random.permutation(125) + 1
@@ -72,6 +86,7 @@ if __name__ == "__main__":
     print("3: Sideways Move")
     print("4: Random Restart Hill Climbing")
     print("5: Simulated Annealing")
+    print("6: Genetic Algorithm")
     choice = input("Enter the number of your choice: ")
 
     if choice == "1":
@@ -84,5 +99,16 @@ if __name__ == "__main__":
         run_algorithm(random_restart_hill_climbing, cube, iterations=1000, max_restarts=500)
     elif choice == "5":
         run_algorithm(simulated_annealing, cube, initial_temp=100, cooling_rate=0.8, max_iter=121000)
+    elif choice == "6":
+        print("1. Probabilistic Crossover (allowing downhill in the middle iterations)")
+        print("2. nonProbabilistic Crossover")
+        crossover_choice = input("Enter the number of your choice: ")
+        if crossover_choice == 1:
+            crossover = "probabilistic"
+        else:
+            crossover = "randomized"
+        population_size = int(input("Enter Population Size: "))
+        iterations = int(input("Enter max iteration: "))
+        run_GA(crossover_choice, population_size, iterations)
     else:
-        print("Invalid choice. Please select a number between 1 and 5.")
+        print("Invalid choice. Please select a number between 1 and 6.")
