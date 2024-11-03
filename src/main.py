@@ -31,31 +31,25 @@ def run_algorithm(algorithm, cube, **kwargs):
         count_restart = 0
     elif algorithm.__name__ == "random_restart_hill_climbing":
         algorithm_name = "Random Restart Hill Climbing"
-        count_iteration, count_restart, result, score, scores, duration = result
+        count_restart, result, score, scores, duration = result
     elif algorithm.__name__ == "simulated_annealing":
         algorithm_name = "Simulated Annealing"
         count_iteration, result, score, scores, probabilities, count_stuck, duration = result
         count_restart = 0
 
+    print(f"Initial Cube: {cube}")
     print(f"Final Cube: {result}")
     print(f"Final Objective Function Value: {score}")
     print(f"Search Duration: {duration:.2f} s")
-    print(f"Number of Iterations: {count_iteration}")
-    if algorithm.__name__ == "random_restart_hill_climbing":
+    if algorithm.__name__ in ["steepest_ascent", "stochastic_hill_climbing", "sideways_move"]:
+        print(f"Number of Iterations: {count_iteration}")
+    elif algorithm.__name__ == "random_restart_hill_climbing":
         print(f"Number of Restarts: {count_restart}")
     elif algorithm.__name__ == "simulated_annealing":
         print(f"Number of Stuck Moves: {count_stuck}")
 
     plot_scores(scores, algorithm_name)
-    # if algorithm.__name__ == "simulated_annealing":
-    #     unique_probabilities, count_unique_probabilities = np.unique(probabilities, return_counts=True)
 
-    #     plt.plot(count_unique_probabilities, unique_probabilities)
-    #     plt.xlabel("Probability")
-    #     plt.ylabel("Count")
-    #     plt.title("Probability Progress (Line Plot)")
-    #     plt.grid(True)
-    #     plt.show()
     if algorithm.__name__ == "simulated_annealing":
         subsampled_probabilities = probabilities[::2000]
         subsampled_iterations = np.arange(len(subsampled_probabilities)) * 2000
@@ -110,13 +104,13 @@ if __name__ == "__main__":
         run_algorithm(simulated_annealing, cube, initial_temp=100, cooling_rate=0.8, max_iter=121000)
     elif choice == "6":
         print("1. Probabilistic Crossover (allowing downhill in the middle iterations)")
-        print("2. nonProbabilistic Crossover")
+        print("2. Non-probabilistic Crossover")
         crossover_choice = input("Enter the number of your choice: ")
         if crossover_choice == 1:
-            crossover = "probabilistic"
+            crossover = "Probabilistic"
         else:
-            crossover = "randomized"
-        population_size = int(input("Enter Population Size: "))
+            crossover = "Randomized"
+        population_size = int(input("Enter population size: "))
         iterations = int(input("Enter max iteration: "))
         run_GA(crossover_choice, population_size, iterations)
     else:
