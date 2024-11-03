@@ -10,7 +10,7 @@ from utils.count_of_match import count_of_match
 from algorithms.genetic.crossover import *
 
 class GeneticAlgorithm:
-    def __init__(self, crossover_func="randomized", population_size=100, iterations=1000, shuffle=False):
+    def __init__(self, crossover_func="randomized", population_size=100, iterations=1000, shuffle=True):
         """
         Inisialisasi solver GA.
 
