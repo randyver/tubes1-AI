@@ -5,6 +5,7 @@ from algorithms.hill_climbing.stochastic import stochastic_hill_climbing
 from algorithms.hill_climbing.sideways_move import sideways_move
 from algorithms.hill_climbing.random_restart import random_restart_hill_climbing
 from algorithms.simulated_annealing.simulated_annealing import simulated_annealing
+from utils import cube_plot as cp
 
 def plot_scores(scores, algorithm_name):
     plt.plot(scores)
@@ -62,6 +63,8 @@ def run_algorithm(algorithm, cube, **kwargs):
         plt.title("Smoothed Probability Progress")
         plt.grid(True)
         plt.show()
+
+    cp.main(result)
 
 if __name__ == "__main__":
     cube = np.random.permutation(125) + 1
