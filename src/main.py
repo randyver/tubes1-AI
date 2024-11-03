@@ -65,6 +65,8 @@ def run_GA(crossover_func : str, population_size : int, iterations: int):
     print("Running algorithm...")
     genetic_solver = GeneticAlgorithm(crossover_func =crossover_func, population_size=population_size,iterations=iterations,shuffle=True)
     solution = genetic_solver.solve()
+    best_initial_state = solution['best_initial_state']
+    cp.main(best_initial_state)
     best_final_state_config = solution['best_config']
     score = solution['best_score']
     duration = solution['elapsed_time']
