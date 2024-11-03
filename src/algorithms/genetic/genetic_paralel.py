@@ -164,9 +164,9 @@ class GeneticAlgorithm:
         parent2 = self.selection(population, scores)
 
         if crossover_func == "randomized":
-            child1, child2 = custom_randomized_segment_preserving_crossover(parent1, parent2)
+            child1, child2 = custom_segment_preserving_crossover(parent1, parent2)
         else:
-            child1, child2 = custom_probabilistic_randomized_segment_preserving_crossover(parent1, parent2, iterations=total_iteration, current_iteration=iter)
+            child1, child2 = custom_probabilistic_segment_preserving_crossover(parent1, parent2, iterations=total_iteration, current_iteration=iter)
 
         if random.random() < 0.1:
             child1 = self.mutate(child1)

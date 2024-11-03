@@ -1,7 +1,7 @@
 import random
 import numpy as np
 
-def custom_randomized_segment_preserving_crossover(parent1, parent2):
+def custom_segment_preserving_crossover(parent1, parent2):
     
     child1 = [-1] * len(parent1)  
     child2 = [-1] * len(parent2)  
@@ -25,14 +25,14 @@ def custom_randomized_segment_preserving_crossover(parent1, parent2):
 
 def fill_randomly(child, unused_elements):
     """Mengisi elemen yang kosong di anak dengan elemen yang tidak digunakan secara acak."""
-    random.shuffle(unused_elements)  
+    # random.shuffle(unused_elements)  
     missing_elements = iter(unused_elements)
     
     for i in range(len(child)):
         if child[i] == -1: 
             child[i] = next(missing_elements)
 
-def custom_probabilistic_randomized_segment_preserving_crossover(parent1, parent2, initial_prob=0.0001, peak_prob=0.01, final_prob=0.0001, iterations=1000, current_iteration=1, prob_unprotected=1.0):
+def custom_probabilistic_segment_preserving_crossover(parent1, parent2, initial_prob=0.0001, peak_prob=0.01, final_prob=0.0001, iterations=1000, current_iteration=1, prob_unprotected=1.0):
     
     midpoint = iterations / 8
     if current_iteration <= midpoint:
@@ -63,7 +63,7 @@ def custom_probabilistic_randomized_segment_preserving_crossover(parent1, parent
 
 def fill_remaining_elements_random(child, unused_elements):
     """Mengisi elemen yang kosong di anak dengan elemen yang tidak digunakan secara acak."""
-    random.shuffle(unused_elements)  
+    
     used_elements = set(child) - {-1} 
     missing_elements = [elem for elem in unused_elements if elem not in used_elements] 
     missing_elements = iter(missing_elements)
