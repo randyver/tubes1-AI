@@ -140,7 +140,6 @@ def find_protected_indices(arr):
 
 
 def find_segments_with_magic_number(arr, magic_number=315):
-    n = int(round(len(arr) ** (1/3)))  
     segments = {"rows": [], "columns": [], "pillars": [], "xy_diagonals": [], "xz_diagonals": [], "yz_diagonals": [], "space_diagonals": []}
 
     for i in range(25):

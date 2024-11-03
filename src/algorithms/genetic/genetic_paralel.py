@@ -8,9 +8,9 @@ import sys
 # Menambahkan path untuk mengimpor fungsi eksternal
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 from utils.count_of_match import count_of_match
-from utils.crossover import custom_randomized_segment_preserving_crossover, custom_probabilistic_randomized_segment_preserving_crossover
+from algorithms.genetic.crossover import *
 
-class GA_solver:
+class GeneticAlgorithm:
     def __init__(self, crossover_func="randomized", population_size=100, iterations=1000, shuffle=False):
         """
         Inisialisasi solver GA.
@@ -144,7 +144,8 @@ class GA_solver:
         solution = {
             "config": final_solution,
             "index": final_solution_index,
-            "iteration_scores": iteration_scores
+            "iteration_scores": iteration_scores,
+            "best_score" : best_score
         }
         return solution
 
@@ -197,19 +198,20 @@ class GA_solver:
         start_time = time.time()
         solution = self.genetic_algorithm()
         end_time = time.time()
-        elapsed_time = end_time - start_time  # Hitung waktu eksekusi
-
+        elapsed_time = round(end_time - start_time,5)  
         initial_population = self.initial_population
         best_initial_individual = self.find_best_individual(initial_population)
         index = solution['index']
         best_config = solution['config']
         iteration_scores = solution['iteration_scores']
-
+        matched_list = find_segments_with_magic_number(best_config)
         solution = {
             "elapsed_time": elapsed_time,
             "best_initial_state": best_initial_individual,
             "best_index": index,
             "best_config": best_config,
-            "iteration_scores": iteration_scores
+            "iteration_scores": iteration_scores,
+            "matched_list": matched_list,
+            "best_score": solution["best_score"]
         }
         return solution
