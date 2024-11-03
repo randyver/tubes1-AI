@@ -144,7 +144,8 @@ class GeneticAlgorithm:
         solution = {
             "config": final_solution,
             "index": final_solution_index,
-            "iteration_scores": iteration_scores
+            "iteration_scores": iteration_scores,
+            "best_score" : best_score
         }
         return solution
 
@@ -210,6 +211,7 @@ class GeneticAlgorithm:
             "best_index": index,
             "best_config": best_config,
             "iteration_scores": iteration_scores,
-            "matched_list": matched_list
+            "matched_list": matched_list,
+            "best_score": solution["best_score"]
         }
         return solution

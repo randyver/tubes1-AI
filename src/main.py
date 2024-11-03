@@ -71,10 +71,11 @@ def run_GA(crossover_func : str, population_size : int, iterations: int):
     best_final_state_index = solution['best_index']
     best_final_state_config = solution['best_config']
     matched_segment_list = solution['matched_list']
-    print("State awal: ", best_initial_state)
+    print("State awal:", best_initial_state)
     print(f"State solusi: populasi ke-{best_final_state_index}, konfigurasi:", best_final_state_config)
-    print("Daftar segment matched-315: ", matched_segment_list)
-    print("Waktu: ", elapsed_time, "sec")
+    print("Daftar segment matched-315:", matched_segment_list)
+    print("Score(obj value):", str(solution["best_score"])+"/109")
+    print("Waktu:", elapsed_time, "sec")
     plot_iteration_scores_GA(solution["iteration_scores"])
 
 if __name__ == "__main__":
