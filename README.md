@@ -45,7 +45,7 @@ python main.py
 2. Follow the prompts to select an algorithm and input parameters if required
 
 ### 6. Task distribution
-| NIM |  Nama  | Tugas |
+| NIM |  Name  | Task |
 |-----|--------|------|
 | 13522067   | Randy Verdian | Steepest Ascent HC, Stochastic HC, Sideways Move HC, Random Restart HC |
 | 13522079  |  Emery Fathan Zwageri  |   Genetic Algorithm |
