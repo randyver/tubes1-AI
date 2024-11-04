@@ -80,7 +80,7 @@ def find_magic_coordinates(cube_data):
 def visualize_magic_cube(cube_data, magic_coords):
     fig = go.Figure()
     explosion_factor = 3
-    color_map = {1: 'skyblue', 2: 'lightgreen', 3: 'gold', 4: 'orange', 5: 'red'}
+    color_map = {1: 'skyblue', 2: 'lightgreen', 3: 'gold', 4: 'orange', 5: 'red', 6: 'darkblue', 7: 'darkgreen', 8: 'pink', 9: 'maroon', 10: 'brown', 11: 'gray', 12: 'indigo', 13: 'purple'}
     
     for i in range(5):
         for j in range(5):
